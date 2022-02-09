@@ -1,25 +1,37 @@
 import React from 'react';
-import {Text, StyleSheet, View, Image} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import { Text, StyleSheet, View, Image } from 'react-native';
+import Swiper from 'react-native-swiper'
+import { SafeAreaView } from 'react-native-safe-area-context';
 import COLORS from '../../consts/colors';
-import {PrimaryButton} from '../components/Button';
+import { PrimaryButton } from '../components/Button';
 
-const OnBoardScreen = ({navigation}) => {
+const OnBoardScreen = ({ navigation }) => {
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
-      <View style={{height: 400}}>
-        <Image
-          style={{
-            width: '100%',
-            resizeMode: 'contain',
-            top: -150,
-          }}
-          source={require('../../assets/onboardImage.png')}
-        />
-      </View>
-      <View style={style.textContainer}>
-        <View>
-          <Text style={{fontSize: 32, fontWeight: 'bold', textAlign: 'center'}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
+      <Swiper style={style.wrapper}
+        dot={
+          <View
+            style={style.indicator}
+          />
+        }
+        activeDot={
+          <View
+            style={style.currentIndicator}
+          />
+        }
+        showsButtons={false}>
+        <View style={style.slide1}>
+          <View style={{ height: 400 }}>
+            <Image
+              style={{
+                width: '100%',
+                resizeMode: 'contain',
+                top: -150,
+              }}
+              source={require('../../assets/onboardImage.png')}
+            />
+          </View>
+          <Text style={{ fontSize: 32, fontWeight: 'bold', textAlign: 'center' }}>
             Delicious Food
           </Text>
           <Text
@@ -32,11 +44,14 @@ const OnBoardScreen = ({navigation}) => {
             We help you to find best and delicious food
           </Text>
         </View>
-        <View style={style.indicatorContainer}>
-          <View style={style.currentIndicator} />
-          <View style={style.indicator} />
-          <View style={style.indicator} />
+        <View style={style.slide2}>
+          <Text style={style.text}>Beautiful</Text>
         </View>
+        <View style={style.slide3}>
+          <Text style={style.text}>And simple</Text>
+        </View>
+      </Swiper>
+      <View style={style.controlContainer}>
         <PrimaryButton
           onPress={() => navigation.navigate('Home')}
           title="Get Started"
@@ -73,6 +88,30 @@ const style = StyleSheet.create({
     borderRadius: 6,
     backgroundColor: COLORS.grey,
     marginHorizontal: 5,
+  },
+  wrapper: {
+  },
+  controlContainer: {
+    paddingHorizontal: 50,
+    justifyContent: 'space-between',
+    paddingBottom: 40,
+  },
+  slide1: {
+    flex: 1,
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 30,
+    fontWeight: 'bold'
   },
 });
 
